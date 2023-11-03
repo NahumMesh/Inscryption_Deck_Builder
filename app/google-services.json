@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "101077120305",
+    "project_id": "inscryption-deck-builder",
+    "storage_bucket": "inscryption-deck-builder.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:101077120305:android:74a0be4cc627662b2cac10",
+        "android_client_info": {
+          "package_name": "com.example.inscryptiondeckbuilder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGBbRGgJrdwc3KZVLvNDGYI_7chZJnf58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

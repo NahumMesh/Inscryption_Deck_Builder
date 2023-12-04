@@ -1,28 +1,35 @@
 package com.example.inscryptiondeckbuilder.navgraphs
 
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.inscryptiondeckbuilder.BottomBarScreen
+import com.example.inscryptiondeckbuilder.screens.CardCatalogScreen
+import com.example.inscryptiondeckbuilder.screens.CardCatalogViewModel
 import com.example.inscryptiondeckbuilder.screens.ScreenContent
 
 @Composable
 fun HomeNavGraph(navController: NavHostController) {
+    val cardCatalogViewModel: CardCatalogViewModel = viewModel()
+
     NavHost(
         navController = navController,
         route = Graph.HOME,
         startDestination = BottomBarScreen.Home.route
     ) {
         composable(route = BottomBarScreen.Home.route) {
-            ScreenContent(
-                name = BottomBarScreen.Home.route,
-                onClick = {
-                    navController.navigate(Graph.CARD)
-                }
-            )
+//            ScreenContent(
+//                name = BottomBarScreen.Home.route,
+//                onClick = {
+//                    navController.navigate(Graph.CARD)
+//                }
+//            )
+
+            CardCatalogScreen(cardCatalogViewModel)
         }
 
         composable(route = BottomBarScreen.Deck.route) {

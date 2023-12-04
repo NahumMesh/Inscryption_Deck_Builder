@@ -1,7 +1,7 @@
 package com.example.inscryptiondeckbuilder.data
 
 data class CardData(
-    var card_name: String? = null,
+    var card_name: String = "",
     var power: Int? = null,
     var health: Int? = null,
     var cost: String? = null,

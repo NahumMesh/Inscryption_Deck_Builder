@@ -38,16 +38,13 @@ fun DetailScreen(
     cost: String?,
     health: Int?,
     power: Int?,
-    sigils: List<HashMap<String, String>>?,
-    id: String?
+    sigils: List<HashMap<String, String>>?
 ) {
-
     val sigilOneName: String? = sigils!![0]["name"]
     val sigilOneEffect: String? = sigils[0]["effect"]
 
     val sigilTwoName: String? = sigils[1]["name"]
     val sigilTwoEffect: String? = sigils[1]["effect"]
-
 
     Column(
         modifier

@@ -22,14 +22,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import androidx.navigation.navigation
 import coil.compose.AsyncImage
 import com.example.inscryptiondeckbuilder.BottomBarScreen
 import com.example.inscryptiondeckbuilder.screens.Card
@@ -37,7 +34,6 @@ import com.example.inscryptiondeckbuilder.screens.ScreenContent
 import com.example.inscryptiondeckbuilder.screens.DetailScreen
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
-import kotlinx.coroutines.tasks.await
 import androidx.compose.runtime.*
 import androidx.navigation.compose.*
 
@@ -49,7 +45,7 @@ fun HomeNavGraph(navController: NavHostController) {
         startDestination = BottomBarScreen.Home.route
     ) {
         composable(route = BottomBarScreen.Home.route) {
-            CardCatalog(navController, onNavigateToCardScreen = {
+            CardCatalog(onNavigateToCardScreen = {
                 navController.navigate(route = "card_data/$it")
             })
         }
@@ -61,46 +57,8 @@ fun HomeNavGraph(navController: NavHostController) {
                 }
             )
         ) {
-            val db = Firebase.firestore
-
-            var cardId: String = ""
-            var cardImage: String? = ""
-            var cardName: String? = ""
-            var cardCost: String? = ""
-            var cardHealth: Int? = 0
-            var cardPower: Int? = 0
-            var cardSigils: List<HashMap<String, String>> = emptyList()
-
-            cardId = it.arguments!!.getString("id").toString()
-
+            val cardId = it.arguments!!.getString("id").toString()
             scrapeData(cardId = cardId)
-            /*
-            db.collection("cards").document(cardId)
-                .get()
-                .addOnSuccessListener { card ->
-                    cardImage = card.getString("card_image_file_name")
-                    cardName = card.getString("card_name")
-                    cardCost = card.getString("cost")
-                    cardHealth = card.getLong("health")?.toInt()
-                    cardPower = card.getLong("power")?.toInt()
-                    cardSigils = card.get("sigils") as List<HashMap<String, String>>
-
-                    Log.d(ContentValues.TAG, "Error getting documents.")
-                }
-                .addOnFailureListener { exception ->
-                    Log.w(ContentValues.TAG, "Error getting documents.", exception)
-                }
-                Log.d(ContentValues.TAG, "What is the card id?$cardId")
-                Log.d(ContentValues.TAG, "What is the card name?$cardName")
-                DetailScreen(
-                    photos = cardImage,
-                    names = cardName,
-                    cost = cardCost,
-                    health = cardHealth,
-                    power = cardPower,
-                    sigils = cardSigils,
-                    id = it.arguments?.getString("id")
-                )*/
         }
 
         composable(route = BottomBarScreen.Deck.route) {
@@ -116,14 +74,12 @@ fun HomeNavGraph(navController: NavHostController) {
                 onClick = { }
             )
         }
-
-        //cardNavGraph(navController = navController)
     }
 }
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
-fun CardCatalog(navController: NavHostController, onNavigateToCardScreen: (String) -> Unit) {
+fun CardCatalog(onNavigateToCardScreen: (String) -> Unit) {
     val db = Firebase.firestore
     val cardDataList by remember { mutableStateOf(mutableStateListOf<Card>()) }
 
@@ -154,10 +110,8 @@ fun CardCatalog(navController: NavHostController, onNavigateToCardScreen: (Strin
             ColumnItem(
                 imageUrl = data.card_image_file_name,
                 itemIndex = data.id,
-                navController = navController,
                 onNavigateToCardScreen = onNavigateToCardScreen
             )
-
         }
     }
 }
@@ -166,7 +120,6 @@ fun CardCatalog(navController: NavHostController, onNavigateToCardScreen: (Strin
 fun ColumnItem(
     imageUrl: String,
     itemIndex: String,
-    navController: NavController,
     onNavigateToCardScreen: (String) -> Unit
 ){
     Row(
@@ -188,86 +141,44 @@ fun ColumnItem(
 
 @Composable
 fun scrapeData(cardId: String) {
-    /*
     val db = Firebase.firestore
-
-    var cardImage: String? = ""
-    var cardName: String? = ""
-    var cardCost: String? = ""
-    var cardHealth: Int? = 0
-    var cardPower: Int? = 0
-    var cardSigils: List<HashMap<String, String>> = emptyList()
+    val cardData by remember { mutableStateOf(mutableStateListOf<Cards>()) }
 
     db.collection("cards").document(cardId)
         .get()
-        .addOnSuccessListener { card ->
-            cardImage = card.getString("card_image_file_name")
-            cardName = card.getString("card_name")
-            cardCost = card.getString("cost")
-            cardHealth = card.getLong("health")?.toInt()
-            cardPower = card.getLong("power")?.toInt()
-            cardSigils = card.get("sigils") as List<HashMap<String, String>>
+        .addOnSuccessListener { items ->
+            val image = items.data?.get("card_image_file_name").toString()
+            val names = items.data?.get("card_name").toString()
+            val cost = items.data?.get("cost").toString()
+            val health = items.data?.get("health") as Long
+            val power = items.data?.get("power") as Long
+            val sigils = items.data?.get("sigils") as List<HashMap<String, String>>
 
-            Log.d(ContentValues.TAG, "Error getting documents.")
+            cardData.add(Cards(image, names, cost, health, power, sigils))
         }
         .addOnFailureListener { exception ->
             Log.w(ContentValues.TAG, "Error getting documents.", exception)
         }
-    Log.w(ContentValues.TAG, "Card Name?$cardName")
-    Log.w(ContentValues.TAG, "Card ID?$cardId")
+
+    for (data in cardData) {
+
+        Log.d(ContentValues.TAG, "Card Name?${data.card_name}")
         DetailScreen(
-            photos = cardImage,
-            names = cardName,
-            cost = cardCost,
-            health = cardHealth,
-            power = cardPower,
-            sigils = cardSigils,
-            id = cardId
-        )*/
-    val cardData by fetchCardData(cardId)
-
-    Log.d(ContentValues.TAG, "Card Data?$cardData")
-
-    DetailScreen(
-        photos = cardData.card_image_file_name,
-        names = cardData.card_name,
-        cost = cardData.cost,
-        health = cardData.health,
-        power = cardData.power,
-        sigils = cardData.sigils,
-        id = cardId
-    )
-}
-
-@Composable
-fun fetchCardData(cardId: String): State<Cards> {
-    val db = Firebase.firestore
-
-    val cardsState = remember { mutableStateOf(Cards())}
-    LaunchedEffect(cardId) {
-        val document = db.collection("cards").document(cardId).get().await()
-
-        if (document.exists()) {
-            val card = document.toObject(Cards::class.java)
-            cardsState.value = card ?: Cards()
-        } else {
-            Log.d(ContentValues.TAG, "Error getting documents.")
-        }
+            photos = data.card_image_file_name,
+            names = data.card_name,
+            cost = data.cost,
+            health = data.health?.toInt(),
+            power = data.power?.toInt(),
+            sigils = data.sigils
+        )
     }
-
-    return cardsState
 }
 
 data class Cards(
     val card_image_file_name: String? = "",
     val card_name: String? = "",
     val cost: String? = "",
-    val health: Int? = 0,
-    val power: Int? = 0,
+    val health: Long? = 0,
+    val power: Long? = 0,
     val sigils: List<HashMap<String, String>> = emptyList()
 )
-
-
-sealed class CardScreen(val route: String) {
-    object CardInfo : CardScreen(route = "CARD INFO")
-}

@@ -1,4 +1,5 @@
-import android.annotation.SuppressLint
+package com.example.inscryptiondeckbuilder.screens
+
 import android.content.ContentValues
 import android.util.Log
 import androidx.compose.foundation.background
@@ -24,27 +25,30 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.example.inscryptiondeckbuilder.BottomBarScreen
 import com.example.inscryptiondeckbuilder.data.CardData
 import com.example.inscryptiondeckbuilder.data.CardImage
-import com.example.inscryptiondeckbuilder.screens.DetailCardScreen
 import com.google.firebase.Firebase
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 
-@SuppressLint("UnrememberedMutableState")
 @Composable
-fun CardScreen(onNavigateToCardScreen: (String) -> Unit) {
+fun DeckScreen(onNavigateToCardScreen: (String) -> Unit) {
     val db = Firebase.firestore
-    val cardDataList = mutableStateListOf<CardImage>()
+    val deckDataList = mutableStateListOf<CardImage>()
 
-    db.collection("cards")
+    db.collection("deck")
         .get()
-        .addOnSuccessListener { cards ->
-            for (card in cards) {
+        .addOnSuccessListener { deck ->
+            for (card in deck) {
                 val image = card.data["card_image_file_name"].toString()
                 val id = card.id
                 val name = card.data["card_name"].toString()
-                cardDataList.add(CardImage(id, image, name))
+                deckDataList.add(CardImage(id, image, name))
+
+                Log.d(ContentValues.TAG, "The deck. $deck")
             }
         }
         .addOnFailureListener { exception ->
@@ -57,8 +61,7 @@ fun CardScreen(onNavigateToCardScreen: (String) -> Unit) {
         horizontalArrangement = Arrangement.spacedBy(3.dp),
         contentPadding = PaddingValues(top = 75.dp, bottom = 90.dp)
     ) {
-        items(cardDataList) { data ->
-
+        items(deckDataList ) { data ->
             Row(
                 modifier = Modifier
                     .background(color = Color.DarkGray)
@@ -84,11 +87,11 @@ fun CardScreen(onNavigateToCardScreen: (String) -> Unit) {
 }
 
 @Composable
-fun ScrapeCard(cardId: String) {
+fun ScrapeDeck(cardId: String, navController: NavController) {
     val db = Firebase.firestore
-    val cardData by remember { mutableStateOf(mutableStateListOf<CardData>()) }
+    val deckData by remember { mutableStateOf(mutableStateListOf<CardData>()) }
 
-    db.collection("cards").document(cardId)
+    db.collection("deck").document(cardId)
         .get()
         .addOnSuccessListener { items ->
             val id = items.id
@@ -99,20 +102,60 @@ fun ScrapeCard(cardId: String) {
             val power = items.data?.get("power") as? Long
             val sigils = items.data?.get("sigils") as? List<HashMap<String, String>>
 
-            cardData.add(CardData(id, image, names, cost, health, power, sigils))
+            deckData.add(CardData(id, image, names, cost, health, power, sigils))
         }
         .addOnFailureListener { exception ->
             Log.w(ContentValues.TAG, "Error getting documents.", exception)
         }
 
-    for (data in cardData) {
-        DetailCardScreen(
+    for (data in deckData) {
+        DetailDeckScreen(
+            id = data.id,
             photos = data.card_image_file_name,
             names = data.card_name,
             cost = data.cost,
             health = data.health?.toInt(),
             power = data.power?.toInt(),
-            sigils = data.sigils
+            sigils = data.sigils,
+            navController = navController
         )
     }
+}
+
+fun writeData(
+    photos: String?,
+    names: String?,
+    cost: String?,
+    health: Int?,
+    power: Int?,
+    sigils: List<HashMap<String, String>>?
+){
+    val db = FirebaseFirestore.getInstance()
+
+    val data = hashMapOf(
+        "card_image_file_name" to photos,
+        "card_name" to names,
+        "cost" to cost,
+        "health" to health,
+        "power" to power,
+        "sigils" to sigils
+    )
+    db.collection("deck")
+        .add(data)
+        .addOnFailureListener { e ->
+            Log.w(ContentValues.TAG, "Error getting documents.", e)
+        }
+}
+
+fun deleteData(navController: NavController, collectionPath: String, id: String){
+    val db = FirebaseFirestore.getInstance()
+
+    db.collection(collectionPath)
+        .document(id)
+        .delete()
+        .addOnFailureListener { e ->
+            Log.w(ContentValues.TAG, "Error deleting documents.", e)
+        }
+
+    navController.navigate(route = BottomBarScreen.Deck.route)
 }

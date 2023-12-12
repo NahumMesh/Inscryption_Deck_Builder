@@ -2,6 +2,7 @@ package com.example.inscryptiondeckbuilder
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -14,7 +15,7 @@ sealed class BottomBarScreen(
     object Home : BottomBarScreen(
         route = "HOME",
         title = "HOME",
-        icon = Icons.Default.List
+        icon = Icons.Default.Home
     )
 
     object Deck : BottomBarScreen(

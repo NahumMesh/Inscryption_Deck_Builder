@@ -5,7 +5,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.inscryptiondeckbuilder.screens.LoginContent
-import com.example.inscryptiondeckbuilder.screens.ScreenContent
 
 fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
     navigation(
@@ -25,7 +24,7 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
         }
 
         composable(route = AuthScreen.SignUp.route) {
-            ScreenContent(name = AuthScreen.SignUp.route) {}
+
         }
     }
 }

@@ -42,11 +42,11 @@ fun DetailScreen(
     id: String?
 ) {
 
-    var sigilOneName: String? = sigils!![0]["name"]
-    var sigilOneEffect: String? = sigils[0]["effect"]
+    val sigilOneName: String? = sigils!![0]["name"]
+    val sigilOneEffect: String? = sigils[0]["effect"]
 
-    var sigilTwoName: String? = sigils[1]["name"]
-    var sigilTwoEffect: String? = sigils[1]["effect"]
+    val sigilTwoName: String? = sigils[1]["name"]
+    val sigilTwoEffect: String? = sigils[1]["effect"]
 
 
     Column(

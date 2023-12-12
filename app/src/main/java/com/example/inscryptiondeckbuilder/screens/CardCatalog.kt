@@ -14,7 +14,10 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.FilterQuality
@@ -22,16 +25,15 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.example.inscryptiondeckbuilder.navgraphs.CardId
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 
-
+/*
 @SuppressLint("UnrememberedMutableState")
 @Composable
 fun CardCatalog(navController: NavHostController) {
     val db = Firebase.firestore
-    val cardDataList = mutableStateListOf<Card>()
+    val cardDataList by remember { mutableStateOf(mutableStateListOf<Card>())}
 
     db.collection("cards")
         .get()
@@ -67,7 +69,6 @@ fun CardCatalog(navController: NavHostController) {
         }
 }
 
-
 @Composable
 fun ColumnItem(
 imageUrl: String,
@@ -80,7 +81,7 @@ navController: NavController
             .fillMaxWidth()
             .padding((5.dp))
             .clickable {
-                navController.navigate(route = "card_data/${itemIndex}")
+                navController.navigate(route = "card_data/$itemIndex")
             }
     ) {
         AsyncImage(
@@ -91,3 +92,4 @@ navController: NavController
     }
 }
 
+*/

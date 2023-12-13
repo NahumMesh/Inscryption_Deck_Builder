@@ -1,13 +1,14 @@
 package com.example.inscryptiondeckbuilder.navgraphs
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.inscryptiondeckbuilder.screens.HomeScreen
 
 @Composable
-fun RootNavGraph(navController: NavHostController) {
+fun RootNavGraph(navController: NavHostController, darkTheme: MutableState<Boolean>) {
     NavHost(
         navController = navController,
         route = Graph.ROOT,
@@ -15,7 +16,7 @@ fun RootNavGraph(navController: NavHostController) {
     ) {
         authNavGraph(navController = navController)
         composable(route = Graph.HOME) {
-            HomeScreen()
+            HomeScreen(darkTheme = darkTheme)
         }
     }
 }

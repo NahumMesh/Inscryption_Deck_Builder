@@ -3,6 +3,7 @@ package com.example.inscryptiondeckbuilder.navgraphs
 import CardScreen
 import ScrapeCard
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -11,10 +12,11 @@ import androidx.navigation.navArgument
 import com.example.inscryptiondeckbuilder.BottomBarScreen
 import com.example.inscryptiondeckbuilder.screens.DeckScreen
 import com.example.inscryptiondeckbuilder.screens.ScrapeDeck
+import com.example.inscryptiondeckbuilder.screens.SettingsScreen
 
 
 @Composable
-fun HomeNavGraph(navController: NavHostController) {
+fun HomeNavGraph(navController: NavHostController, darkTheme: MutableState<Boolean>) {
     NavHost(
         navController = navController,
         startDestination = BottomBarScreen.Home.route
@@ -54,7 +56,10 @@ fun HomeNavGraph(navController: NavHostController) {
         }
 
         composable(route = BottomBarScreen.Settings.route) {
-
+            SettingsScreen(
+                darkTheme = darkTheme.value,
+                onThemeUpdated = {darkTheme.value = !darkTheme.value}
+            )
         }
     }
 }

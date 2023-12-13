@@ -24,6 +24,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 
+/**
+ * The DetailDeckScreen Composable function splits the sigil data up.
+ * Then displays all of the data inside rows and an async image.
+ * The FAB will call the deleteData function to delete the card to the deck.
+ */
 @SuppressLint("UnrememberedMutableState")
 @Composable
 fun DetailDeckScreen(
@@ -37,6 +42,7 @@ fun DetailDeckScreen(
     sigils: List<HashMap<String, String>>?,
     navController: NavController
 ) {
+    // This is splitting up the sigil data by name and effect.
     val sigilOneName: String? = sigils?.get(0)?.get("name")
     val sigilOneEffect: String? = sigils?.get(0)?.get("effect")
 
@@ -58,21 +64,28 @@ fun DetailDeckScreen(
                 .padding(top = 60.dp),
             filterQuality = FilterQuality.None
         )
-        Text(text = names.toString(), fontSize = 30.sp, fontWeight = FontWeight.Bold)
+        Text(text = names.toString(),
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold)
 
         Row(
             modifier.wrapContentSize(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ){
-            Text(text = "Cost: " + cost.toString(),fontSize = 18.sp)
+            Text(text = "Cost: " + cost.toString(),
+                fontSize = 18.sp)
 
         }
         Row(
             modifier.wrapContentSize(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Text(text = "Health: " + health.toString(), modifier.padding(horizontal = 10.dp), fontSize = 18.sp)
-            Text(text = "Power: " + power.toString(), modifier.padding(horizontal = 10.dp), fontSize = 18.sp)
+            Text(text = "Health: " + health.toString(),
+                modifier.padding(horizontal = 10.dp),
+                fontSize = 18.sp)
+            Text(text = "Power: " + power.toString(),
+                modifier.padding(horizontal = 10.dp),
+                fontSize = 18.sp)
         }
 
         Row(
@@ -91,9 +104,11 @@ fun DetailDeckScreen(
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             if (sigilTwoName != "NULL"){
-                Text(text = sigilTwoName.toString() + ": " + sigilTwoEffect.toString(), fontSize = 18.sp)
+                Text(text = sigilTwoName.toString() + ": " + sigilTwoEffect.toString(),
+                    fontSize = 18.sp)
             }
         }
+        // This FAB will call the deleteData function, which deletes the card from the deck and navigates to the DeckScreen.
         ExtendedFloatingActionButton(
             text = { Text(text = "Remove card from deck") },
             icon = { Icon(Icons.Filled.Delete, "Deleting card from deck") },

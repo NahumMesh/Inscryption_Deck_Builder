@@ -31,6 +31,10 @@ import com.example.inscryptiondeckbuilder.screens.DetailCardScreen
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 
+/**
+ * The CardScreen Composable function displays the LazyVerticalGrid with the data from the FireStore.
+ * Once the card is clicked, it navigates to the DetailCardScreen.
+ */
 @SuppressLint("UnrememberedMutableState")
 @Composable
 fun CardScreen(onNavigateToCardScreen: (String) -> Unit) {
@@ -83,6 +87,10 @@ fun CardScreen(onNavigateToCardScreen: (String) -> Unit) {
     }
 }
 
+/**
+ * The ScrapeCard Composable function scrapes data from the FireStore.
+ * It then calls the DetailCardScreen and passes the values into it.
+ */
 @Composable
 fun ScrapeCard(cardId: String) {
     val db = Firebase.firestore
@@ -105,6 +113,7 @@ fun ScrapeCard(cardId: String) {
             Log.w(ContentValues.TAG, "Error getting documents.", exception)
         }
 
+    // Adding the queried data into the DetailCardScreen.
     for (data in cardData) {
         DetailCardScreen(
             photos = data.card_image_file_name,

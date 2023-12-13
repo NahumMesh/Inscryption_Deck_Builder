@@ -25,6 +25,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 
+
+/**
+ * The DetailCardScreen Composable function splits the sigil data up.
+ * Then displays all of the data inside rows and an async image.
+ * The FAB will call the writeData function to add the card to the deck.
+ */
 @SuppressLint("UnrememberedMutableState")
 @Composable
 fun DetailCardScreen(
@@ -36,6 +42,7 @@ fun DetailCardScreen(
     power: Int?,
     sigils: List<HashMap<String, String>>?
 ) {
+    // This is splitting up the sigil data by name and effect.
     val sigilOneName: String? = sigils?.get(0)?.get("name")
     val sigilOneEffect: String? = sigils?.get(0)?.get("effect")
 
@@ -110,6 +117,7 @@ fun DetailCardScreen(
             }
         }
 
+        // This FAB will call the writeData function, which adds the card from the deck and calls a toast.
         val context = LocalContext.current
         ExtendedFloatingActionButton(
             text = { Text(text = "Add card to deck") },

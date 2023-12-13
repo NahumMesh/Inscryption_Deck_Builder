@@ -75,7 +75,8 @@ fun DetailCardScreen(
             modifier.wrapContentSize(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Text(text = "Cost: " + cost.toString(),
+            Text(
+                text = "Cost: " + cost.toString(),
                 fontSize = 18.sp
             )
         }
@@ -88,6 +89,7 @@ fun DetailCardScreen(
                 modifier.padding(horizontal = 10.dp),
                 fontSize = 18.sp
             )
+
             Text(text = "Power: " + power.toString(),
                 modifier.padding(horizontal = 10.dp),
                 fontSize = 18.sp
@@ -111,7 +113,8 @@ fun DetailCardScreen(
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             if (sigilTwoName != "NULL"){
-                Text(text = sigilTwoName.toString() + ": " + sigilTwoEffect.toString(),
+                Text(
+                    text = sigilTwoName.toString() + ": " + sigilTwoEffect.toString(),
                     fontSize = 18.sp
                 )
             }

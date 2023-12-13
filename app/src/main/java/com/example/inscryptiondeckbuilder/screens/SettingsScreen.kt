@@ -67,7 +67,8 @@ fun ThemeSwitcher(
     // This is for the animation.
     val offset by animateDpAsState(
         targetValue = if (darkTheme) 0.dp else size,
-        animationSpec = animationSpec
+        animationSpec = animationSpec,
+        label = ""
     )
 
     Box(modifier = Modifier
@@ -85,6 +86,7 @@ fun ThemeSwitcher(
                 .clip(shape = toggleShape)
                 .background(MaterialTheme.colorScheme.primary)
         ) {}
+
         // Two boxes are inside this row to hold both icons.
         Row(
             modifier = Modifier
@@ -108,6 +110,7 @@ fun ThemeSwitcher(
                     else MaterialTheme.colorScheme.primary
                 )
             }
+
             Box(
                 modifier = Modifier.size(size),
                 contentAlignment = Alignment.Center

@@ -34,9 +34,10 @@ fun HomeNavGraph(navController: NavHostController, darkTheme: MutableState<Boole
 
         // Composable for displaying the details of a single card clicked on by a user from the home
         // page. It keeps track of the id so that it can display the correct card data.
-        composable(route = "card_data/{id}",
+        composable(
+            route = "card_data/{id}",
             arguments = listOf(
-                navArgument(name = "id"){
+                navArgument(name = "id") {
                     type = NavType.StringType
                 }
             )
@@ -57,7 +58,7 @@ fun HomeNavGraph(navController: NavHostController, darkTheme: MutableState<Boole
         // page. It keeps track of the id so that it can display the correct card data.
         composable(route = "deck_data/{id}",
             arguments = listOf(
-                navArgument(name = "id"){
+                navArgument(name = "id") {
                     type = NavType.StringType
                 }
             )

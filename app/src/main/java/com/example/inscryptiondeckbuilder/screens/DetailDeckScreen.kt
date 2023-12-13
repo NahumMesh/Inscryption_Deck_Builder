@@ -65,7 +65,8 @@ fun DetailDeckScreen(
             filterQuality = FilterQuality.None
         )
 
-        Text(text = names.toString(),
+        Text(
+            text = names.toString(),
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold
         )
@@ -74,11 +75,13 @@ fun DetailDeckScreen(
             modifier.wrapContentSize(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Text(text = "Cost: " + cost.toString(),
+            Text(
+                text = "Cost: " + cost.toString(),
                 fontSize = 18.sp
             )
 
         }
+
         Row(
             modifier.wrapContentSize(),
             horizontalArrangement = Arrangement.SpaceEvenly
@@ -107,15 +110,19 @@ fun DetailDeckScreen(
                 )
             }
         }
+
         Row(
             modifier.wrapContentSize(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             if (sigilTwoName != "NULL"){
-                Text(text = sigilTwoName.toString() + ": " + sigilTwoEffect.toString(),
-                    fontSize = 18.sp)
+                Text(
+                    text = sigilTwoName.toString() + ": " + sigilTwoEffect.toString(),
+                    fontSize = 18.sp
+                )
             }
         }
+
         // This FAB will call the deleteData function, which deletes the card from the deck and navigates to the DeckScreen.
         ExtendedFloatingActionButton(
             text = { Text(text = "Remove card from deck") },

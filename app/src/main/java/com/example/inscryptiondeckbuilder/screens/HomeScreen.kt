@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -50,15 +51,16 @@ fun HomeScreen(navController: NavHostController = rememberNavController(), darkT
                         modifier.fillMaxWidth(),
                         contentAlignment = Alignment.Center
                     ){
-                        Text(text = "Inscryption Deck Builder")
+                        Text(
+                            text = "Inscryption Deck Builder",
+                            fontWeight = FontWeight.Bold
+                        )
                     }
                 },
-
                 // Modifier add some padding and round the edges of the top bar.
                 modifier
                     .padding(10.dp)
                     .clip(RoundedCornerShape(20.dp)),
-
                 // Set the top bar to a desired hex colour.
                 colors = TopAppBarDefaults.smallTopAppBarColors(
                     containerColor = Color(0xFF697359)
@@ -68,11 +70,9 @@ fun HomeScreen(navController: NavHostController = rememberNavController(), darkT
         bottomBar = {
                 BottomBar(navController = navController)
             }
-    )
-    {
+    ) {
         HomeNavGraph(navController = navController, darkTheme = darkTheme)
     }
-
 }
 
 /**
@@ -138,5 +138,5 @@ fun RowScope.AddItem(
                 launchSingleTop = true
             }
         }
-        )
+    )
 }

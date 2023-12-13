@@ -82,7 +82,8 @@ fun DeckScreen(onNavigateToCardScreen: (String) -> Unit) {
                     modifier = Modifier.padding(top = 15.dp)
                 )
             }
-            Text(text = data.card_name, color = Color.White,
+            Text(
+                text = data.card_name, color = Color.White,
                 fontSize = 15.sp, fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center
             )

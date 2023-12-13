@@ -3,10 +3,12 @@ package com.example.inscryptiondeckbuilder
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 
+/**
+ * This has navigation routes and are used instead of hard coding strings into the route.
+ */
 sealed class BottomBarScreen(
     val route: String,
     val title: String,

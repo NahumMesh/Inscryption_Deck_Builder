@@ -6,16 +6,10 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -37,13 +31,17 @@ import androidx.navigation.compose.rememberNavController
 import com.example.inscryptiondeckbuilder.BottomBarScreen
 import com.example.inscryptiondeckbuilder.navgraphs.HomeNavGraph
 
+/**
+ * The home screen creates the top and bottom bars.
+ * It takes in the home nav graph which contains all of the screens.
+ */
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavHostController = rememberNavController(), darkTheme: MutableState<Boolean>) {
     val modifier = Modifier
     Scaffold(
-        // Top bar that has a title, navigation and action icons.
+        // Top bar that has a title.
         topBar = {
             // We assign the title as a box with modifiers and the actual text.
             TopAppBar(
@@ -77,6 +75,10 @@ fun HomeScreen(navController: NavHostController = rememberNavController(), darkT
 
 }
 
+/**
+ * The BottomBar Composable function gets a list of screens.
+ * It then adds the items into each screen.
+ */
 @Composable
 fun BottomBar(navController: NavHostController) {
     val modifier = Modifier
@@ -107,6 +109,10 @@ fun BottomBar(navController: NavHostController) {
     }
 }
 
+/**
+ * The RowScope Composable function adds the items into each NavBarItem.
+ * It then navigates to each screen depending on what icon is clicked.
+ */
 @Composable
 fun RowScope.AddItem(
     screen: BottomBarScreen,

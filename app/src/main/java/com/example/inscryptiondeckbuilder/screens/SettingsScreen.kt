@@ -25,6 +25,9 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
+/**
+ * This SettingsScreen Composable displays the Theme switcher and some text.
+ */
 @Composable
 fun SettingsScreen(darkTheme: Boolean, onThemeUpdated: () -> Unit){
     Column(
@@ -45,6 +48,10 @@ fun SettingsScreen(darkTheme: Boolean, onThemeUpdated: () -> Unit){
     }
 }
 
+/**
+ * The ThemeSwitcher function gets called by the SettingsScreen Composable.
+ * It creates an animation for the toggle.
+ */
 @Composable
 fun ThemeSwitcher(
     darkTheme: Boolean = false,
@@ -57,6 +64,7 @@ fun ThemeSwitcher(
     animationSpec: AnimationSpec<Dp> = tween(durationMillis = 300),
     onClick: () -> Unit
 ) {
+    // This is for the animation.
     val offset by animateDpAsState(
         targetValue = if (darkTheme) 0.dp else size,
         animationSpec = animationSpec
@@ -77,6 +85,7 @@ fun ThemeSwitcher(
                 .clip(shape = toggleShape)
                 .background(MaterialTheme.colorScheme.primary)
         ) {}
+        // Two boxes are inside this row to hold both icons.
         Row(
             modifier = Modifier
                 .border(

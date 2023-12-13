@@ -34,6 +34,10 @@ import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 
+/**
+ * The DeckScreen Composable function displays a LazyVerticalGrid with the data from the FireStore.
+ * Once the card is clicked, it navigates to the DetailDeckScreen.
+ */
 @Composable
 fun DeckScreen(onNavigateToCardScreen: (String) -> Unit) {
     val db = Firebase.firestore
@@ -86,6 +90,10 @@ fun DeckScreen(onNavigateToCardScreen: (String) -> Unit) {
     }
 }
 
+/**
+ * The ScrapeDeck Composable function scrapes data from the FireStore.
+ * It then calls the DetailDeckScreen and passed the values into it.
+ */
 @Composable
 fun ScrapeDeck(cardId: String, navController: NavController) {
     val db = Firebase.firestore
@@ -108,6 +116,7 @@ fun ScrapeDeck(cardId: String, navController: NavController) {
             Log.w(ContentValues.TAG, "Error getting documents.", exception)
         }
 
+    // Adding the queried data into the DetailDeckScreen.
     for (data in deckData) {
         DetailDeckScreen(
             id = data.id,
@@ -122,6 +131,9 @@ fun ScrapeDeck(cardId: String, navController: NavController) {
     }
 }
 
+/**
+ * The writeData function writes the data from the selected card, to the deck collection.
+ */
 fun writeData(
     photos: String?,
     names: String?,
@@ -147,6 +159,10 @@ fun writeData(
         }
 }
 
+/**
+ * The deleteData function queries the database and deletes the data from the selected card.
+ * Once the data is deleted, it navigates to the deckScreen.
+ */
 fun deleteData(navController: NavController, collectionPath: String, id: String){
     val db = FirebaseFirestore.getInstance()
 

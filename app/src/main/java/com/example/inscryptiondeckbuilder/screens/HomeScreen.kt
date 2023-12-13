@@ -21,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,7 +40,7 @@ import com.example.inscryptiondeckbuilder.navgraphs.HomeNavGraph
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(navController: NavHostController = rememberNavController()) {
+fun HomeScreen(navController: NavHostController = rememberNavController(), darkTheme: MutableState<Boolean>) {
     val modifier = Modifier
     Scaffold(
         // Top bar that has a title, navigation and action icons.
@@ -71,7 +72,7 @@ fun HomeScreen(navController: NavHostController = rememberNavController()) {
             }
     )
     {
-        HomeNavGraph(navController = navController)
+        HomeNavGraph(navController = navController, darkTheme = darkTheme)
     }
 
 }

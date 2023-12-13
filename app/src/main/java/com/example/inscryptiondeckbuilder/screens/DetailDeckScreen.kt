@@ -64,28 +64,36 @@ fun DetailDeckScreen(
                 .padding(top = 60.dp),
             filterQuality = FilterQuality.None
         )
+
         Text(text = names.toString(),
             fontSize = 30.sp,
-            fontWeight = FontWeight.Bold)
+            fontWeight = FontWeight.Bold
+        )
 
         Row(
             modifier.wrapContentSize(),
             horizontalArrangement = Arrangement.SpaceEvenly
-        ){
+        ) {
             Text(text = "Cost: " + cost.toString(),
-                fontSize = 18.sp)
+                fontSize = 18.sp
+            )
 
         }
         Row(
             modifier.wrapContentSize(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Text(text = "Health: " + health.toString(),
+            Text(
+                text = "Health: " + health.toString(),
                 modifier.padding(horizontal = 10.dp),
-                fontSize = 18.sp)
-            Text(text = "Power: " + power.toString(),
+                fontSize = 18.sp
+            )
+
+            Text(
+                text = "Power: " + power.toString(),
                 modifier.padding(horizontal = 10.dp),
-                fontSize = 18.sp)
+                fontSize = 18.sp
+            )
         }
 
         Row(

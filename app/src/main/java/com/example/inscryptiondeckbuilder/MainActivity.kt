@@ -9,6 +9,10 @@ import androidx.compose.runtime.remember
 import com.example.inscryptiondeckbuilder.ui.theme.InscryptionDeckBuilderTheme
 import com.example.inscryptiondeckbuilder.navgraphs.RootNavGraph
 
+/**
+ * MainActivity class that keeps track of the darkTheme state and runs the RootNavGraph function
+ * that handles navigation and displays all the screens.
+ */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

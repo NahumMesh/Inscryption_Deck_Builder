@@ -61,7 +61,7 @@ fun HomeScreen(navController: NavHostController = rememberNavController(), darkT
 
                 // Set the top bar to a desired hex colour.
                 colors = TopAppBarDefaults.smallTopAppBarColors(
-                    containerColor = Color(0xFFAD9CA6)
+                    containerColor = Color(0xFF697359)
                 )
             )
         },
@@ -96,7 +96,7 @@ fun BottomBar(navController: NavHostController) {
             modifier
                 .padding(10.dp)
                 .clip(RoundedCornerShape(20.dp)),
-            containerColor = Color(0xFFAD9CA6)
+            containerColor = Color(0xFF697359)
         ) {
             screens.forEach { screen ->
                 AddItem(

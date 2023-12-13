@@ -7,6 +7,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.inscryptiondeckbuilder.screens.HomeScreen
 
+/**
+ * Root navgraph that sets the startDestination to the authentication navgraph
+ */
 @Composable
 fun RootNavGraph(navController: NavHostController, darkTheme: MutableState<Boolean>) {
     NavHost(
@@ -21,7 +24,9 @@ fun RootNavGraph(navController: NavHostController, darkTheme: MutableState<Boole
     }
 }
 
-
+/**
+ * Graph object used for simplifying the call of navgraph routes.
+ */
 object Graph {
     const val ROOT = "root_graph"
     const val AUTHENTICATION = "auth_graph"

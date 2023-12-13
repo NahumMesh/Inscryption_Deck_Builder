@@ -1,3 +1,5 @@
+package com.example.inscryptiondeckbuilder.screens
+
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.util.Log
@@ -27,7 +29,6 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.inscryptiondeckbuilder.data.CardData
 import com.example.inscryptiondeckbuilder.data.CardImage
-import com.example.inscryptiondeckbuilder.screens.DetailCardScreen
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 

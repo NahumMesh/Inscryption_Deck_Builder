@@ -7,7 +7,8 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 
 /**
- * This has navigation routes and are used instead of hard coding strings into the route.
+ * BottomBarScreen sealed class that simplifies the calling of the routes, titles, and icons of all
+ * the different bottom bar buttons.
  */
 sealed class BottomBarScreen(
     val route: String,

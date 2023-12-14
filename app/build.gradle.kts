@@ -63,7 +63,7 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     // Navigation.
     implementation("androidx.navigation:navigation-compose:2.7.5")
-    // Firebase implementations.
+    // Firebase implementations, updated versions.
     implementation("com.google.firebase:firebase-firestore-ktx:24.10.0")
     implementation("com.google.firebase:firebase-firestore:24.10.0")
     implementation("com.google.firebase:firebase-storage:20.3.0")
